@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.OrderListbycustomer_Result>
+
+@{
+    ViewBag.Title = "ByCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;padding-top:1em">Thống kê doanh thu từ khách hàng</h2>
+
+
+<div class="form-group">
+
+    @using (Html.BeginForm())
+    {
+        <input type="text" class="form-control search" placeholder="Tên khách hàng..." name="SearchString">
+        <input type="submit" class="btn btn-primary" value="Search" />
+    }
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                Mã đơn hàng
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Ngày đặt
+            </th>
+            <th>
+                Ngày ship
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tổng_tiền)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShipDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+
+    </tr>
+        }
+
+    </table>

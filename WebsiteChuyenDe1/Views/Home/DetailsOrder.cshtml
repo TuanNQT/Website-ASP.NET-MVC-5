@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "DetailsOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 class="text-center" style="padding-top:1em">Chi tiết lịch sử mua hàng</h2>
+<table class="table">
+    <tr>
+        <th>
+            Mã đơn hàng
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+           Thành tiến
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.ModelNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UnitCost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.thanhtien)
+    </td>
+</tr>
+    }
+</table>
+<h3>Total:@Model.Sum(x=>x.thanhtien)</h3>

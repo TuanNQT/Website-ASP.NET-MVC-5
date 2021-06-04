@@ -1,0 +1,138 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.ShoppingCart>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var session = (WebsiteChuyenDe1.Models.UserLogin)Session[WebsiteChuyenDe1.Models.CommonConstants.USER_SESSION];
+}
+@if (session == null)
+{
+    @Html.Action("Index", "Home")
+}
+@if (Model.Count() == 0)
+{
+    <h1 style="text-align:center">Giỏ hàng chưa có sản phẩm</h1>
+
+    <a href="@Url.Action("Index", "Home")">
+
+        <span class="fa fa-hand-o-right" aria-hidden="true" style="text-align:center;font-size:40px"> Đi mua hàng nào</span>
+    </a>
+}
+else
+{<div class="services-breadcrumb">
+    <div class="agile_inner_breadcrumb">
+        <div class="container">
+            <ul class="w3_short">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Giỏ hàng</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <div class="privacy">
+        <div class="container">
+            <!-- tittle heading -->
+            <h3 class="tittle-w3l">
+                Giỏ hàng của bạn
+                <span class="heading-style">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+            </h3>
+            <!-- //tittle heading -->
+            <div class="checkout-right">
+                <h4>
+                    Hiện đang có
+                    <span>@Model.Count() sản phẩm</span>
+                </h4>
+                <div class="table-responsive">
+                    <table class="timetable_sub">
+                        <thead>
+                            <tr>
+                                <th>Ảnh</th>
+                                @*<th>Quality</th>*@
+                                <th>Tên</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr class="rem1">
+
+                                    <td class="invert-image">
+                                        <a href="single2.html">
+                                            <img src="~/images/@item.Product.ProductImage" alt=" " class="img-responsive" style="width:170px;height:120px">
+                                        </a>
+                                    </td>
+
+                                    @*<td class="invert">
+                                            <div class="quantity">
+                                                <span><input name="soluong" type="number" value="@item.Quantity"></span>
+                                            </div>
+                                        </td>*@
+                                    <td class="invert">@item.Product.ModelName </td>
+                                    <td class="invert">@item.Product.UnitCost</td>
+                                    <td>
+                                        <form action="@Url.Action("Update", "Home")" method="post">
+                                            <input type="number" name="id" value="@item.ProductID" hidden />
+                                            <div>
+                                                <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepDown();">
+                                                    -
+                                                </button>
+
+                                                <input type="number" name="soluong" min="1" max="100" value="@item.Quantity" style="text-align:center">
+
+                                                <button type="button" onclick="this.parentNode.querySelector('[type=number]').stepUp();">
+                                                    +
+                                                </button>
+                                            </div>
+                                            @*<input name="soluong" type="number" value="@item.Quantity">*@
+                                            <input type="number" name="cusid" value="@session.UserID" hidden />
+                                            <input type="submit" name="submit" value="Update" class="btn-success" style="margin-top:6px" />
+                                        </form>
+                                    </td>
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <a href="@Url.Action("Xoacart","Home",new {cusid=session.UserID,cartid=item.CartID})"><button class="close1" style="border:0px" @* solid;margin-right:2em"*@></button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="checkout-left">
+                <div class="address_form_agile">
+                    <a href="@Url.Action("AddOrder", "Home", new { cusid = session.UserID })">
+                        <button class="submit check_out">CheckOut</button>
+                    </a>
+                    <div class="checkout-right-basket">
+                        <a href="@Url.Action("Index", "Home")">
+                            Tiếp tục mua
+                            <span class="fa fa-hand-o-right" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        </div>
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Message
+    </div>
+}

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Category>
+        
+        @foreach (var item in Model)
+        {
+    <li>
+        <input type="radio" name="cid" value="">
+        <a href="@Url.Action("Index","Home",new { cid=item.CategoryID})" style="pointer-events:all">@item.CategoryName</a>
+    </li>
+        }
+
+

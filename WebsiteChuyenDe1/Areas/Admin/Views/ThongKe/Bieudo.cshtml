@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Bieudo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+}
+
+@*<h2 style="text-align:center;">Biểu đồ thống kê doanh thu khách hàng</h2>*@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	creditText: "NQT",
+	zoomEnabled: true,
+	title: {
+		text: "Thống kê doanh thu khách hàng"
+	},
+	subtitles: [{
+		text: ""
+	}],
+	axisY: {
+		title: "Doanh thu",
+		gridThickness: 0
+	},
+	data: [{
+		type: "bar",
+		indexLabel: "{y}$",
+		dataPoints: @Html.Raw(ViewBag.DataPoints)
+	}@*,{
+		type: "bar",
+		indexLabel: "{y}$",
+		dataPoints: @Html.Raw(ViewBag.DataPoints2)
+	}*@]
+});
+	chart.render();
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+	creditText: "",
+	zoomEnabled: true,
+	title: {
+		text: "Thống kê doanh thu theo tháng"
+	},
+	subtitles: [{
+		text: ""
+	}],
+	axisY: {
+		title: "Doanh thu",
+		gridThickness: 0
+	},
+	data: [{
+        type: "line",
+		indexLabel: "{y}$",
+		dataPoints: @Html.Raw(ViewBag.DataPoints2)
+	}@*,{
+		type: "bar",
+		indexLabel: "{y}$",
+		dataPoints: @Html.Raw(ViewBag.DataPoints)
+	}*@]
+});
+	chart2.render();
+
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+	animationEnabled: true,
+	creditText: "NQT",
+	zoomEnabled: true,
+	title: {
+		text: "Thống kê xu hướng tiêu dùng theo loại sản phẩm"
+	},
+	subtitles: [{
+		text: ""
+	}],
+	axisY: {
+		title: "Số lượng sản phẩm bán ra",
+		gridThickness: 0
+	},
+	data: [{
+        type: "pyramid",
+		indexLabel: "{y}",
+		dataPoints: @Html.Raw(ViewBag.DataPoints3)
+	}@*,{
+		type: "bar",
+		indexLabel: "{y}$",
+		dataPoints: @Html.Raw(ViewBag.DataPoints)
+	}*@]
+});
+chart3.render();
+
+}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
+    <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html> 

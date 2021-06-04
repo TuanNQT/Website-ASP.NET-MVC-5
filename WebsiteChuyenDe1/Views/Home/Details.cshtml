@@ -1,0 +1,177 @@
+﻿@model WebsiteChuyenDe1.Models.Product
+@{
+    var session = (WebsiteChuyenDe1.Models.UserLogin)Session[WebsiteChuyenDe1.Models.CommonConstants.USER_SESSION];
+}
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="services-breadcrumb">
+    <div class="agile_inner_breadcrumb">
+        <div class="container">
+            <ul class="w3_short">
+                <li>
+                    <a href="@Url.Action("Index","Home")">Home</a>
+                    <i>|</i>
+                </li>
+                <li>Chi tiết</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- //page -->
+<!-- Single Page -->
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">
+            Chi tiết sản phẩm
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="col-md-5 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="~/images/a7.jpg">
+                            <div class="thumb-image">
+                                <img src="~/images/@Model.ProductImage" data-imagezoom="true" class="img-responsive" alt="" style="max-width:300px;max-height:400px;">
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 single-right-left simpleCart_shelfItem">
+            <h3>@Model.ModelName</h3>
+            <p>Mã sản phẩm:@Model.ModelNumber</p>
+            <p>
+                <span class="item_price">$@Model.UnitCost</span>
+                @*<del>$1300.00</del>*@
+                <label>Free ship</label>
+            </p>
+            <div class="single-infoagile">
+                @Model.Description
+            </div>
+            <div class="product-single-w3l">
+                <p>
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>Đây là sản phẩm thuộc nhóm
+                    <label>@Model.Category.CategoryName</label>
+                </p>
+                <p>
+                    <i class="fa fa-refresh" aria-hidden="true"></i>Hàng trao tay
+                    <label>không trả lại.</label>
+                </p>
+            </div>
+            <div class="occasion-cart">
+                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                    @if (session != null)
+                    {
+                        <a href="@Url.Action("Addtocart","Home",new { id=Model.ProductID,soluong=1,cusid=session.UserID})"><input type="button" value=" Add to cart" class="button"></input></a>
+                    }
+                    else
+                    {
+                        <a href="#" data-toggle="modal" data-target="#myModal1"><input type="button" value="Đăng nhập để mua" class="button"></input></a>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+@Html.Action("GoiY","Home")
+@Html.Action("Addreview", "Home", new { id = Model.ProductID })
+@Html.Action("Reviewshow", "Home")
+
+<!-- smoothscroll -->
+<script src="~/Content/templatehomejs/SmoothScroll.min.js"></script>
+<!-- //smoothscroll -->
+<!-- start-smooth-scrolling -->
+<script src="~/Content/templatehomejs/move-top.js"></script>
+<script src="~/Content/templatehomejs/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script>
+    $(document).ready(function () {
+        /*
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        */
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- imagezoom -->
+<script src="~/Content/templatehomejs/imagezoom.js"></script>
+<!-- //imagezoom -->
+<!-- FlexSlider -->
+<script src="~/Content/templatehomejs/jquery.flexslider.js"></script>
+<script>
+    // Can also be used with $(document).ready()
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: "thumbnails"
+        });
+    });
+</script>
+<!-- //FlexSlider-->
+<!-- flexisel (for special offers) -->
+<script src="~/Content/templatehomejs/jquery.flexisel.js"></script>
+<script>
+    $(window).load(function () {
+        $("#flexiselDemo1").flexisel({
+            visibleItems: 3,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint: 480,
+                    visibleItems: 1
+                },
+                landscape: {
+                    changePoint: 640,
+                    visibleItems: 2
+                },
+                tablet: {
+                    changePoint: 768,
+                    visibleItems: 2
+                }
+            }
+        });
+
+    });
+</script>
+<!-- //flexisel (for special offers) -->
+<!-- for bootstrap working -->
+<script src="~/Content/templatehomejs/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- //js-files --

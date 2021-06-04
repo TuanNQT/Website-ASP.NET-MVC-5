@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;padding-top:1em">Quản trị danh sách các đơn hàng</h2>
+<a href="@Url.Action( "Add","Order")"><img src="~/images/edit_add.png" />Thêm mới</a>
+@using (Html.BeginForm())
+{
+    <span>Nhập mã đơn hàng:</span>
+    <input type="text" name="idorder">
+    <input type="submit" class="btn btn-primary" value="Search" />
+    <span>Nhập mã khách hàng:</span>
+    <input type="number" name="cusid">
+    @*@Html.DropDownList("CurrentClientName", ViewBag.ClientListNames as IEnumerable<SelectListItem>, "-Tên Khách hàng-", new { @class = "form-control" })*@
+    <input type="submit" class="btn btn-primary" value="Search" />
+    <br />
+    <br />
+    <span>Trạng thái đơn hàng:</span>
+    <select name="trangthai">
+        <option >--Không chọn--</option>
+        <option value=true>Đang giao hàng</option>
+        <option value=false>Chờ xác nhận</option>
+    </select>
+    <input type="submit" class="btn btn-primary" value="Search" />
+    <span style="padding-left:10em">Ngày đặt từ:</span>
+    <input type="date" name="startDate" /><span>---</span>
+    <input type="date" name="endDate" />
+    <input type="submit" class="btn btn-primary" value="Search" />
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.FullName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+                @if (item.status == false || item.status == null)
+                {
+                    <a href="@Url.Action("checkorder","Order",new{id = item.OrderID})" style="padding-left:1em"><img src="~/images/check.png" style="width:40px;height:40px;border:1px solid" /></a>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+            <td>
+                <a href="@Url.Action( "Details","Order" ,new { id = item.OrderID })"><img src="~/images/view-details.png" /></a>
+                <a href="@Url.Action( "Delete","Order" ,new { id = item.OrderID })"><img src="~/images/delete.png" /></a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Order>
+
+@{
+    ViewBag.Title = "ViewOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center" style="padding-top:1em">Lịch sử mua hàng</h2>
+
+<table class="table" border="1">
+    <tr>
+        <th>
+            Mã đơn hàng
+        </th>
+        <th>
+            Ngày đặt hàng
+        </th>
+        <th>
+            Ngày ship
+        </th>
+        <th>
+           Trạng thái
+        </th>
+        <th>Chức năng</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipDate)
+    </td>
+    <td>
+        @if (item.status == false)
+        {
+            <span>Chờ xác nhận</span>
+        }
+        @if (item.status == true)
+        {
+            <span>Đang giao hàng</span>
+        }
+    </td>
+    <td>
+        <a href="@Url.Action( "DetailsOrder","Home" ,new { id = item.OrderID })"><img src="~/images/view-details.png" /></a>
+    </td>
+</tr>
+}
+
+</table>

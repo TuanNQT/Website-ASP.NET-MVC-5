@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.GoiYSP>
+@{
+    ViewBag.Title = "";
+    Layout = "";
+}
+@{
+    var session = (WebsiteChuyenDe1.Models.UserLogin)Session[WebsiteChuyenDe1.Models.CommonConstants.USER_SESSION];
+}
+<div class="featured-section" id="projects">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">
+          Người dùng cùng lựa chọn
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="content-bottom-in">
+            <ul id="flexiselDemo1">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <div class="w3l-specilamk">
+                            <div class="speioffer-agile">
+                                <a href="@Url.Action("Details","Home",new { id=item.prid,rv=item.prid,gy=item.prid})">
+                                    <img src="~/images/@item.hinh" alt="" style="width:150px;height:150px">
+                                </a>
+                            </div>
+                            <div class="product-name-w3l">
+                                <h4>
+                                    <a href="@Url.Action("Details","Home",new { id=item.prid,rv=item.prid,gy=item.prid})">@item.ten</a>
+                                </h4>
+                                <div class="w3l-pricehkj">
+                                    <h6>@item.gia</h6>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                    @if (session != null)
+                                    {
+                                        <a href="@Url.Action("Addtocart","Home",new { id=item.prid,soluong=1,cusid=session.UserID})"><input type="button" value=" Add to cart" class="button"></input></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" data-toggle="modal" data-target="#myModal1"><input type="button" value="Đăng nhập để mua" class="button"></input></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

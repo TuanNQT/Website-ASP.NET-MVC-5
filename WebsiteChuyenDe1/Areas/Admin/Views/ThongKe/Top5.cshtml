@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.TopProduct_Result>
+
+@{
+    ViewBag.Title = "Top5";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <h2 style="text-align:center;padding-top:1em">Top 5 sản phẩm được ưa thích nhất</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           Số lượng bán 
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+           Hình Ảnh
+        </th>
+        <th>
+            Doanh thu
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModelName)
+        </td>
+        <td>
+           <img src="~/images/@item.ProductImage" style="width:160px;height:160px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doanh_Thu)
+        </td>
+    </tr>
+}
+
+</table>

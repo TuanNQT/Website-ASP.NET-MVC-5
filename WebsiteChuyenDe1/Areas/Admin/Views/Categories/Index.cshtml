@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+    <h2 style="text-align:center;padding-top:1em">CURD Danh mục sản phẩm</h2>
+
+<table class="table">
+    <tr>
+        <th>
+           Danh mục sản phẩm
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            <a href="@Url.Action( "Create","Categories")"><img src="~/images/edit_add.png" /></a>&emsp;
+            <a href="@Url.Action( "Edit","Categories" ,new { id = item.CategoryID })"><img src="~/images/settings.png" /></a>&emsp;
+            <a href="@Url.Action( "Delete","Categories", new { id = item.CategoryID })"><img src="~/images/delete.png" /></a>
+        </td>
+    </tr>
+}
+
+</table>

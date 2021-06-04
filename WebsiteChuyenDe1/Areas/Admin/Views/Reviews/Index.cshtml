@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-top:1em;text-align:center">Danh sách bình luận từ khách hàng</h2>
+
+<p>
+    @Html.ActionLink("Thhêm bình luận", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Email khách hàng
+        </th>
+        <th>
+            Đánh giá
+        </th>
+        <th>
+            Bình luận
+        </th>
+        <th>
+            Mã sản phẩm
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ModelNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.ReviewID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id=item.ReviewID })
+        </td>
+    </tr>
+}
+
+</table>

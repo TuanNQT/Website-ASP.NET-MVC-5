@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Category>
+    <select id="agileinfo-nav_search" name="agileinfo_search" required="">
+        <a href="@Url.Action("Listproducts","Home")">
+            <option value=""> All Categories
+            </option>
+        </a>
+
+        @foreach (var item in Model)
+        {
+    <a href="@Url.Action("Listproducts","Home",new { cid=item.CategoryID})">
+        <option value="@item.CategoryID">@item.CategoryName</option>
+    </a>
+        }
+    </select>

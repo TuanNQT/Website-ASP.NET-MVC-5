@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.showproduct_Result>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;padding-top:1em">Danh sách sản phẩm</h2>
+@using (Html.BeginForm())
+{
+    <input type="text" class="form-control search" placeholder="Tên hoặc mã..." name="searchname">
+    <input type="submit" class="btn btn-primary" value="Search" />
+}
+<table class="table">
+    <tr>
+        <th>
+            Mã loại sản phẩm
+        </th>
+        <th>
+            Mã sản phẩm
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Ảnh sản phẩm
+        </th>
+        <th>
+            Giá sản phẩm
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelName)
+            </td>
+            <td>
+                <img src="~/images/@item.ProductImage" style="width:160px;height:160px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+                <a href="@Url.Action( "Create","Default")"><img src="~/images/edit_add.png" /></a>&emsp;
+                <a href="@Url.Action( "Edit","Default" ,new { id = item.ProductID })"><img src="~/images/settings.png" /></a>&emsp;
+                <a href="@Url.Action( "Delete","Default", new { id = item.ProductID })"><img src="~/images/delete.png" /></a>
+            </td>
+        </tr>
+    }
+
+</table>

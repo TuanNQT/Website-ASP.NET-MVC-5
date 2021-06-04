@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "";
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Message
+    </div>
+}
+<a href="@Url.Action("Index","Home")">Trở lại</a>

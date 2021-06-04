@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding-top:1em;text-align:center">Chi tiết đơn hàng</h2>
+<h4 style="font:bold"><b>Tổng tiền:@Model.Sum(x => x.thanhtien)</b></h4>
+<table class="table">
+    <tr>
+        <th>
+           Số lượng
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+           Mã đơn hàng
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>Thành tiền</th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UnitCost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Order.OrderID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.ModelNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.thanhtien)
+    </td>
+    @*    <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+</tr>
+}
+</table>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebsiteChuyenDe1.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center;padding-top:1em">Thông tin khách hàng</h2>
+<table class="table">
+    <tr>
+        <th>
+            Tên khách hàng
+        </th>
+        <th>
+            Địa chỉ Email
+        </th>
+        <th>
+           Mật khẩu
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <a href="@Url.Action( "Create","Customers")"><img src="~/images/edit_add.png" /></a>&emsp;
+                <a href="@Url.Action( "Edit","Customers" ,new { id = item.CustomerID })"><img src="~/images/settings.png" /></a>&emsp;
+                <a href="@Url.Action( "Delete","Customers", new { id = item.CustomerID })"><img src="~/images/delete.png" /></a>
+            </td>
+        </tr>
+    }
+
+</table>
